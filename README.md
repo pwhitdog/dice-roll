@@ -1,0 +1,1 @@
+This will be just a simple web app for rolling dice used in games.

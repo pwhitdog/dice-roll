@@ -8,11 +8,13 @@ class SideSelector extends Component {
         this.state = {
             sides: this.getSides(),
             defaultOption: 4,
-            showRollValue: false
+            showRollValue: false,
+            randomNumber: 4
         };
 
         this.handleOptionChange = this.handleOptionChange.bind(this);
         this.rollDice = this.rollDice.bind(this);
+        this.randomNumber = this.randomNumber.bind(this);
     }
 
     getSides() {
@@ -21,17 +23,22 @@ class SideSelector extends Component {
 
     handleOptionChange(event) {
         this.setState({
-            defaultOption: event.target.value,
-            showRollValue: false
+            defaultOption: event.target.value
         });
     }
 
     rollDice() {
-        this.setState({ showRollValue: true });
+        this.setState({
+            showRollValue: true,
+            randomNumber: this.randomNumber()
+        });
+    }
+
+    randomNumber() {
+        return Math.floor(Math.random() * (this.state.defaultOption)) + 1;
     }
 
     render() {
-        let showRoll = this.state.showRollValue;
         return (
             <div>
                 <select value={this.state.defaultOption} onChange={this.handleOptionChange}>
@@ -44,7 +51,7 @@ class SideSelector extends Component {
                 <div>
                     <button className="btn btn-primary" onClick={this.rollDice}>Roll!</button>
                 </div>
-                { showRoll ? <RollValue dieSize={this.state.defaultOption} /> : <h4>Press button to roll.</h4> }
+                <RollValue dieSize={this.state.defaultOption} randomNumber={this.state.randomNumber} />
             </div>
         );
     }

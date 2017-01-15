@@ -22429,11 +22429,13 @@
 	        _this.state = {
 	            sides: _this.getSides(),
 	            defaultOption: 4,
-	            showRollValue: false
+	            showRollValue: false,
+	            randomNumber: 4
 	        };
 	
 	        _this.handleOptionChange = _this.handleOptionChange.bind(_this);
 	        _this.rollDice = _this.rollDice.bind(_this);
+	        _this.randomNumber = _this.randomNumber.bind(_this);
 	        return _this;
 	    }
 	
@@ -22446,19 +22448,25 @@
 	        key: 'handleOptionChange',
 	        value: function handleOptionChange(event) {
 	            this.setState({
-	                defaultOption: event.target.value,
-	                showRollValue: false
+	                defaultOption: event.target.value
 	            });
 	        }
 	    }, {
 	        key: 'rollDice',
 	        value: function rollDice() {
-	            this.setState({ showRollValue: true });
+	            this.setState({
+	                showRollValue: true,
+	                randomNumber: this.randomNumber()
+	            });
+	        }
+	    }, {
+	        key: 'randomNumber',
+	        value: function randomNumber() {
+	            return Math.floor(Math.random() * this.state.defaultOption) + 1;
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var showRoll = this.state.showRollValue;
 	            return _react2.default.createElement(
 	                'div',
 	                null,
@@ -22482,11 +22490,7 @@
 	                        'Roll!'
 	                    )
 	                ),
-	                showRoll ? _react2.default.createElement(_rollValue2.default, { dieSize: this.state.defaultOption }) : _react2.default.createElement(
-	                    'h4',
-	                    null,
-	                    'Press button to roll.'
-	                )
+	                _react2.default.createElement(_rollValue2.default, { dieSize: this.state.defaultOption, randomNumber: this.state.randomNumber })
 	            );
 	        }
 	    }]);
@@ -22515,7 +22519,7 @@
   \*********************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -22541,31 +22545,13 @@
 	    function RollValue(props) {
 	        _classCallCheck(this, RollValue);
 	
-	        var _this = _possibleConstructorReturn(this, (RollValue.__proto__ || Object.getPrototypeOf(RollValue)).call(this, props));
-	
-	        _this.state = {
-	            dieSize: props.dieSize,
-	            randomNumber: _this.randomNumber()
-	        };
-	
-	        _this.randomNumber = _this.randomNumber.bind(_this);
-	        return _this;
+	        return _possibleConstructorReturn(this, (RollValue.__proto__ || Object.getPrototypeOf(RollValue)).call(this, props));
 	    }
 	
 	    _createClass(RollValue, [{
-	        key: 'randomNumber',
-	        value: function randomNumber() {
-	            return Math.floor(Math.random() * (this.props.dieSize - 1)) + 1;
-	        }
-	    }, {
-	        key: 'render',
+	        key: "render",
 	        value: function render() {
-	            return _react2.default.createElement(
-	                'h3',
-	                null,
-	                this.state.randomNumber,
-	                ' is the random number.'
-	            );
+	            return _react2.default.createElement("img", { src: "images/die_" + this.props.dieSize + "_face_" + this.props.randomNumber + ".png" });
 	        }
 	    }]);
 	

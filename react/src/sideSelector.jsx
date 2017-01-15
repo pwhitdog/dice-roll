@@ -23,7 +23,8 @@ class SideSelector extends Component {
 
     handleOptionChange(event) {
         this.setState({
-            defaultOption: event.target.value
+            defaultOption: event.target.value,
+            showRollValue: false
         });
     }
 
@@ -39,6 +40,12 @@ class SideSelector extends Component {
     }
 
     render() {
+        let display = null;
+        if (this.state.showRollValue){
+            display = <RollValue dieSize={this.state.defaultOption} randomNumber={this.state.randomNumber} />;
+        } else {
+            display = <div></div>
+        }
         return (
             <div>
                 <select value={this.state.defaultOption} onChange={this.handleOptionChange}>
@@ -51,7 +58,7 @@ class SideSelector extends Component {
                 <div>
                     <button className="btn btn-primary" onClick={this.rollDice}>Roll!</button>
                 </div>
-                <RollValue dieSize={this.state.defaultOption} randomNumber={this.state.randomNumber} />
+                {display}
             </div>
         );
     }

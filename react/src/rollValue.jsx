@@ -6,8 +6,16 @@ class RollValue extends Component {
     }
 
     render() {
+        let answer = null;
+        if(this.props.dieSize === "6"){
+            answer = <img src={"images/die_" + this.props.dieSize + "_face_" + this.props.randomNumber + ".png"} />;
+        } else {
+            answer = <h3>{this.props.randomNumber}</h3>;
+        }
         return (
-          <img src={"images/die_" + this.props.dieSize + "_face_" + this.props.randomNumber + ".png"} />
+            <div>
+                {answer}
+            </div>
         );
     }
 }

@@ -22448,7 +22448,8 @@
 	        key: 'handleOptionChange',
 	        value: function handleOptionChange(event) {
 	            this.setState({
-	                defaultOption: event.target.value
+	                defaultOption: event.target.value,
+	                showRollValue: false
 	            });
 	        }
 	    }, {
@@ -22467,6 +22468,12 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var display = null;
+	            if (this.state.showRollValue) {
+	                display = _react2.default.createElement(_rollValue2.default, { dieSize: this.state.defaultOption, randomNumber: this.state.randomNumber });
+	            } else {
+	                display = _react2.default.createElement('div', null);
+	            }
 	            return _react2.default.createElement(
 	                'div',
 	                null,
@@ -22490,7 +22497,7 @@
 	                        'Roll!'
 	                    )
 	                ),
-	                _react2.default.createElement(_rollValue2.default, { dieSize: this.state.defaultOption, randomNumber: this.state.randomNumber })
+	                display
 	            );
 	        }
 	    }]);
@@ -22551,7 +22558,21 @@
 	    _createClass(RollValue, [{
 	        key: "render",
 	        value: function render() {
-	            return _react2.default.createElement("img", { src: "images/die_" + this.props.dieSize + "_face_" + this.props.randomNumber + ".png" });
+	            var answer = null;
+	            if (this.props.dieSize === "6") {
+	                answer = _react2.default.createElement("img", { src: "images/die_" + this.props.dieSize + "_face_" + this.props.randomNumber + ".png" });
+	            } else {
+	                answer = _react2.default.createElement(
+	                    "h3",
+	                    null,
+	                    this.props.randomNumber
+	                );
+	            }
+	            return _react2.default.createElement(
+	                "div",
+	                null,
+	                answer
+	            );
 	        }
 	    }]);
 	

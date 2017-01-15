@@ -64,6 +64,10 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
+	var _sideSelector = __webpack_require__(/*! ./sideSelector */ 182);
+	
+	var _sideSelector2 = _interopRequireDefault(_sideSelector);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	_reactDom2.default.render(React.createElement(
@@ -73,7 +77,8 @@
 	        'h2',
 	        null,
 	        'Please select the number of sides you want.'
-	    )
+	    ),
+	    React.createElement(_sideSelector2.default, null)
 	), document.getElementById('root'));
 
 /***/ },
@@ -22381,6 +22386,189 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 182 */
+/*!************************************!*\
+  !*** ./react/src/sideSelector.jsx ***!
+  \************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 183);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _rollValue = __webpack_require__(/*! ./rollValue */ 184);
+	
+	var _rollValue2 = _interopRequireDefault(_rollValue);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var SideSelector = function (_Component) {
+	    _inherits(SideSelector, _Component);
+	
+	    function SideSelector(props) {
+	        _classCallCheck(this, SideSelector);
+	
+	        var _this = _possibleConstructorReturn(this, (SideSelector.__proto__ || Object.getPrototypeOf(SideSelector)).call(this, props));
+	
+	        _this.state = {
+	            sides: _this.getSides(),
+	            defaultOption: 4,
+	            showRollValue: false
+	        };
+	
+	        _this.handleOptionChange = _this.handleOptionChange.bind(_this);
+	        _this.rollDice = _this.rollDice.bind(_this);
+	        return _this;
+	    }
+	
+	    _createClass(SideSelector, [{
+	        key: 'getSides',
+	        value: function getSides() {
+	            return [4, 6, 7, 8, 10, 12, 16, 20];
+	        }
+	    }, {
+	        key: 'handleOptionChange',
+	        value: function handleOptionChange(event) {
+	            this.setState({
+	                defaultOption: event.target.value,
+	                showRollValue: false
+	            });
+	        }
+	    }, {
+	        key: 'rollDice',
+	        value: function rollDice() {
+	            this.setState({ showRollValue: true });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var showRoll = this.state.showRollValue;
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'select',
+	                    { value: this.state.defaultOption, onChange: this.handleOptionChange },
+	                    this.state.sides.map(function (side) {
+	                        return _react2.default.createElement(
+	                            'option',
+	                            { value: side, key: side },
+	                            side
+	                        );
+	                    })
+	                ),
+	                _react2.default.createElement(
+	                    'button',
+	                    { className: 'btn btn-primary', onClick: this.rollDice },
+	                    'Roll!'
+	                ),
+	                showRoll ? _react2.default.createElement(_rollValue2.default, { dieSize: this.state.defaultOption }) : _react2.default.createElement(
+	                    'h4',
+	                    null,
+	                    'Press button to roll.'
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return SideSelector;
+	}(_react.Component);
+	
+	exports.default = SideSelector;
+
+/***/ },
+/* 183 */
+/*!**************************!*\
+  !*** ./~/react/react.js ***!
+  \**************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = __webpack_require__(/*! ./lib/React */ 88);
+
+
+/***/ },
+/* 184 */
+/*!*********************************!*\
+  !*** ./react/src/rollValue.jsx ***!
+  \*********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 183);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var RollValue = function (_Component) {
+	    _inherits(RollValue, _Component);
+	
+	    function RollValue(props) {
+	        _classCallCheck(this, RollValue);
+	
+	        var _this = _possibleConstructorReturn(this, (RollValue.__proto__ || Object.getPrototypeOf(RollValue)).call(this, props));
+	
+	        _this.state = {
+	            dieSize: props.dieSize,
+	            randomNumber: _this.randomNumber()
+	        };
+	
+	        _this.randomNumber = _this.randomNumber.bind(_this);
+	        return _this;
+	    }
+	
+	    _createClass(RollValue, [{
+	        key: 'randomNumber',
+	        value: function randomNumber() {
+	            return Math.floor(Math.random() * this.props.dieSize);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'h3',
+	                null,
+	                this.state.randomNumber,
+	                ' is the random number.'
+	            );
+	        }
+	    }]);
+	
+	    return RollValue;
+	}(_react.Component);
+	
+	exports.default = RollValue;
 
 /***/ }
 /******/ ]);

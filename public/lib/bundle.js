@@ -22474,9 +22474,13 @@
 	                    })
 	                ),
 	                _react2.default.createElement(
-	                    'button',
-	                    { className: 'btn btn-primary', onClick: this.rollDice },
-	                    'Roll!'
+	                    'div',
+	                    null,
+	                    _react2.default.createElement(
+	                        'button',
+	                        { className: 'btn btn-primary', onClick: this.rollDice },
+	                        'Roll!'
+	                    )
 	                ),
 	                showRoll ? _react2.default.createElement(_rollValue2.default, { dieSize: this.state.defaultOption }) : _react2.default.createElement(
 	                    'h4',
@@ -22551,7 +22555,7 @@
 	    _createClass(RollValue, [{
 	        key: 'randomNumber',
 	        value: function randomNumber() {
-	            return Math.floor(Math.random() * this.props.dieSize);
+	            return Math.floor(Math.random() * (this.props.dieSize - 1)) + 1;
 	        }
 	    }, {
 	        key: 'render',

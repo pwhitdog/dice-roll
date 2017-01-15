@@ -12,7 +12,7 @@ class RollValue extends Component {
     }
 
     randomNumber() {
-        return Math.floor(Math.random() * this.props.dieSize);
+        return Math.floor(Math.random() * (this.props.dieSize - 1)) + 1;
     }
 
     render() {

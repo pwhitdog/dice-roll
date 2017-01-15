@@ -41,7 +41,9 @@ class SideSelector extends Component {
                         })
                     }
                 </select>
-                <button className="btn btn-primary" onClick={this.rollDice}>Roll!</button>
+                <div>
+                    <button className="btn btn-primary" onClick={this.rollDice}>Roll!</button>
+                </div>
                 { showRoll ? <RollValue dieSize={this.state.defaultOption} /> : <h4>Press button to roll.</h4> }
             </div>
         );

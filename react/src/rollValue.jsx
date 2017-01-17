@@ -8,7 +8,7 @@ class RollValue extends Component {
     render() {
         let answer = null;
         let crit = null;
-        if(this.props.dieSize === "6" || this.props.dieSize === "20"){
+        if(this.props.dieSize === "6" || this.props.dieSize === "20" || this.props.dieSize === "4"){
             answer = <img src={"images/die_" + this.props.dieSize + "_face_" + this.props.randomNumber + ".png"} />;
         } else {
             answer = <h3>{this.props.randomNumber}</h3>;

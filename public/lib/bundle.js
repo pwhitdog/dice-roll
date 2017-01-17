@@ -22082,7 +22082,7 @@
 	    _createClass(SideSelector, [{
 	        key: 'getSides',
 	        value: function getSides() {
-	            return [4, 6, 7, 8, 10, 12, 16, 20];
+	            return [4, 6, 8, 10, 12, 16, 20];
 	        }
 	    }, {
 	        key: 'handleOptionChange',
@@ -22202,7 +22202,7 @@
 	        value: function render() {
 	            var answer = null;
 	            var crit = null;
-	            if (this.props.dieSize === "6" || this.props.dieSize === "20") {
+	            if (this.props.dieSize === "6" || this.props.dieSize === "20" || this.props.dieSize === "4") {
 	                answer = _react2.default.createElement("img", { src: "images/die_" + this.props.dieSize + "_face_" + this.props.randomNumber + ".png" });
 	            } else {
 	                answer = _react2.default.createElement(

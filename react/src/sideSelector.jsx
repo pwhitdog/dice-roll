@@ -18,7 +18,7 @@ class SideSelector extends Component {
     }
 
     getSides() {
-        return [4, 6, 7, 8, 10, 12, 16, 20];
+        return [4, 6, 8, 10, 12, 16, 20];
     }
 
     handleOptionChange(event) {

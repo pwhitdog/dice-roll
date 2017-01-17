@@ -7,14 +7,21 @@ class RollValue extends Component {
 
     render() {
         let answer = null;
-        if(this.props.dieSize === "6"){
+        let crit = null;
+        if(this.props.dieSize === "6" || this.props.dieSize === "20"){
             answer = <img src={"images/die_" + this.props.dieSize + "_face_" + this.props.randomNumber + ".png"} />;
         } else {
             answer = <h3>{this.props.randomNumber}</h3>;
         }
+        if(+this.props.dieSize === this.props.randomNumber) {
+            crit = <h3 className="alert alert-danger">Crit!</h3>
+        } else if(this.props.randomNumber === 1) {
+            crit = <h3 className="alert alert-warning">Negative Crit!</h3>
+        }
         return (
             <div>
-                {answer}
+                <span>{answer}</span>
+                <span>{crit}</span>
             </div>
         );
     }

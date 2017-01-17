@@ -40,12 +40,14 @@ class SideSelector extends Component {
     }
 
     render() {
+
         let display = null;
         if (this.state.showRollValue){
             display = <RollValue dieSize={this.state.defaultOption} randomNumber={this.state.randomNumber} />;
         } else {
             display = <div></div>
         }
+
         return (
             <div>
                 <select value={this.state.defaultOption} onChange={this.handleOptionChange}>

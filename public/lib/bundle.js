@@ -48,7 +48,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(/*! /Users/paul/WebstormProjects/dice-roll/react/src/index.jsx */1);
-	module.exports = __webpack_require__(/*! /Users/paul/WebstormProjects/dice-roll/react/scss */178);
+	module.exports = __webpack_require__(/*! /Users/paul/WebstormProjects/dice-roll/react/scss */181);
 
 
 /***/ },
@@ -64,7 +64,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _sideSelector = __webpack_require__(/*! ./sideSelector */ 182);
+	var _sideSelector = __webpack_require__(/*! ./sideSelector */ 178);
 	
 	var _sideSelector2 = _interopRequireDefault(_sideSelector);
 	
@@ -22029,6 +22029,225 @@
 
 /***/ },
 /* 178 */
+/*!************************************!*\
+  !*** ./react/src/sideSelector.jsx ***!
+  \************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 179);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _rollValue = __webpack_require__(/*! ./rollValue */ 180);
+	
+	var _rollValue2 = _interopRequireDefault(_rollValue);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var SideSelector = function (_Component) {
+	    _inherits(SideSelector, _Component);
+	
+	    function SideSelector(props) {
+	        _classCallCheck(this, SideSelector);
+	
+	        var _this = _possibleConstructorReturn(this, (SideSelector.__proto__ || Object.getPrototypeOf(SideSelector)).call(this, props));
+	
+	        _this.state = {
+	            sides: _this.getSides(),
+	            defaultOption: 4,
+	            showRollValue: false,
+	            randomNumber: 4
+	        };
+	
+	        _this.handleOptionChange = _this.handleOptionChange.bind(_this);
+	        _this.rollDice = _this.rollDice.bind(_this);
+	        _this.randomNumber = _this.randomNumber.bind(_this);
+	        return _this;
+	    }
+	
+	    _createClass(SideSelector, [{
+	        key: 'getSides',
+	        value: function getSides() {
+	            return [4, 6, 7, 8, 10, 12, 16, 20];
+	        }
+	    }, {
+	        key: 'handleOptionChange',
+	        value: function handleOptionChange(event) {
+	            this.setState({
+	                defaultOption: event.target.value,
+	                showRollValue: false
+	            });
+	        }
+	    }, {
+	        key: 'rollDice',
+	        value: function rollDice() {
+	            this.setState({
+	                showRollValue: true,
+	                randomNumber: this.randomNumber()
+	            });
+	        }
+	    }, {
+	        key: 'randomNumber',
+	        value: function randomNumber() {
+	            return Math.floor(Math.random() * this.state.defaultOption) + 1;
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	
+	            var display = null;
+	            if (this.state.showRollValue) {
+	                display = _react2.default.createElement(_rollValue2.default, { dieSize: this.state.defaultOption, randomNumber: this.state.randomNumber });
+	            } else {
+	                display = _react2.default.createElement('div', null);
+	            }
+	
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'select',
+	                    { value: this.state.defaultOption, onChange: this.handleOptionChange },
+	                    this.state.sides.map(function (side) {
+	                        return _react2.default.createElement(
+	                            'option',
+	                            { value: side, key: side },
+	                            side
+	                        );
+	                    })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    _react2.default.createElement(
+	                        'button',
+	                        { className: 'btn btn-primary', onClick: this.rollDice },
+	                        'Roll!'
+	                    )
+	                ),
+	                display
+	            );
+	        }
+	    }]);
+	
+	    return SideSelector;
+	}(_react.Component);
+	
+	exports.default = SideSelector;
+
+/***/ },
+/* 179 */
+/*!**************************!*\
+  !*** ./~/react/react.js ***!
+  \**************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = __webpack_require__(/*! ./lib/React */ 88);
+
+
+/***/ },
+/* 180 */
+/*!*********************************!*\
+  !*** ./react/src/rollValue.jsx ***!
+  \*********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 179);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var RollValue = function (_Component) {
+	    _inherits(RollValue, _Component);
+	
+	    function RollValue(props) {
+	        _classCallCheck(this, RollValue);
+	
+	        return _possibleConstructorReturn(this, (RollValue.__proto__ || Object.getPrototypeOf(RollValue)).call(this, props));
+	    }
+	
+	    _createClass(RollValue, [{
+	        key: "render",
+	        value: function render() {
+	            var answer = null;
+	            var crit = null;
+	            if (this.props.dieSize === "6" || this.props.dieSize === "20") {
+	                answer = _react2.default.createElement("img", { src: "images/die_" + this.props.dieSize + "_face_" + this.props.randomNumber + ".png" });
+	            } else {
+	                answer = _react2.default.createElement(
+	                    "h3",
+	                    null,
+	                    this.props.randomNumber
+	                );
+	            }
+	            if (+this.props.dieSize === this.props.randomNumber) {
+	                crit = _react2.default.createElement(
+	                    "h3",
+	                    { className: "alert alert-danger" },
+	                    "Crit!"
+	                );
+	            } else if (this.props.randomNumber === 1) {
+	                crit = _react2.default.createElement(
+	                    "h3",
+	                    { className: "alert alert-warning" },
+	                    "Negative Crit!"
+	                );
+	            }
+	            return _react2.default.createElement(
+	                "div",
+	                null,
+	                _react2.default.createElement(
+	                    "span",
+	                    null,
+	                    answer
+	                ),
+	                _react2.default.createElement(
+	                    "span",
+	                    null,
+	                    crit
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return RollValue;
+	}(_react.Component);
+	
+	exports.default = RollValue;
+
+/***/ },
+/* 181 */
 /*!*******************************!*\
   !*** ./react/scss/index.scss ***!
   \*******************************/
@@ -22037,10 +22256,10 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./../../~/css-loader?sourceMap!./../../~/sass-loader?sourceMap!./index.scss */ 179);
+	var content = __webpack_require__(/*! !./../../~/css-loader?sourceMap!./../../~/sass-loader?sourceMap!./index.scss */ 182);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 181)(content, {});
+	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 184)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22057,13 +22276,13 @@
 	}
 
 /***/ },
-/* 179 */
+/* 182 */
 /*!**********************************************************************************!*\
   !*** ./~/css-loader?sourceMap!./~/sass-loader?sourceMap!./react/scss/index.scss ***!
   \**********************************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 180)();
+	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 183)();
 	// imports
 	
 	
@@ -22074,7 +22293,7 @@
 
 
 /***/ },
-/* 180 */
+/* 183 */
 /*!**************************************!*\
   !*** ./~/css-loader/lib/css-base.js ***!
   \**************************************/
@@ -22133,7 +22352,7 @@
 
 
 /***/ },
-/* 181 */
+/* 184 */
 /*!*************************************!*\
   !*** ./~/style-loader/addStyles.js ***!
   \*************************************/
@@ -22386,200 +22605,6 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
-
-/***/ },
-/* 182 */
-/*!************************************!*\
-  !*** ./react/src/sideSelector.jsx ***!
-  \************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 183);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _rollValue = __webpack_require__(/*! ./rollValue */ 184);
-	
-	var _rollValue2 = _interopRequireDefault(_rollValue);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var SideSelector = function (_Component) {
-	    _inherits(SideSelector, _Component);
-	
-	    function SideSelector(props) {
-	        _classCallCheck(this, SideSelector);
-	
-	        var _this = _possibleConstructorReturn(this, (SideSelector.__proto__ || Object.getPrototypeOf(SideSelector)).call(this, props));
-	
-	        _this.state = {
-	            sides: _this.getSides(),
-	            defaultOption: 4,
-	            showRollValue: false,
-	            randomNumber: 4
-	        };
-	
-	        _this.handleOptionChange = _this.handleOptionChange.bind(_this);
-	        _this.rollDice = _this.rollDice.bind(_this);
-	        _this.randomNumber = _this.randomNumber.bind(_this);
-	        return _this;
-	    }
-	
-	    _createClass(SideSelector, [{
-	        key: 'getSides',
-	        value: function getSides() {
-	            return [4, 6, 7, 8, 10, 12, 16, 20];
-	        }
-	    }, {
-	        key: 'handleOptionChange',
-	        value: function handleOptionChange(event) {
-	            this.setState({
-	                defaultOption: event.target.value,
-	                showRollValue: false
-	            });
-	        }
-	    }, {
-	        key: 'rollDice',
-	        value: function rollDice() {
-	            this.setState({
-	                showRollValue: true,
-	                randomNumber: this.randomNumber()
-	            });
-	        }
-	    }, {
-	        key: 'randomNumber',
-	        value: function randomNumber() {
-	            return Math.floor(Math.random() * this.state.defaultOption) + 1;
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var display = null;
-	            if (this.state.showRollValue) {
-	                display = _react2.default.createElement(_rollValue2.default, { dieSize: this.state.defaultOption, randomNumber: this.state.randomNumber });
-	            } else {
-	                display = _react2.default.createElement('div', null);
-	            }
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    'select',
-	                    { value: this.state.defaultOption, onChange: this.handleOptionChange },
-	                    this.state.sides.map(function (side) {
-	                        return _react2.default.createElement(
-	                            'option',
-	                            { value: side, key: side },
-	                            side
-	                        );
-	                    })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    _react2.default.createElement(
-	                        'button',
-	                        { className: 'btn btn-primary', onClick: this.rollDice },
-	                        'Roll!'
-	                    )
-	                ),
-	                display
-	            );
-	        }
-	    }]);
-	
-	    return SideSelector;
-	}(_react.Component);
-	
-	exports.default = SideSelector;
-
-/***/ },
-/* 183 */
-/*!**************************!*\
-  !*** ./~/react/react.js ***!
-  \**************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = __webpack_require__(/*! ./lib/React */ 88);
-
-
-/***/ },
-/* 184 */
-/*!*********************************!*\
-  !*** ./react/src/rollValue.jsx ***!
-  \*********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 183);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var RollValue = function (_Component) {
-	    _inherits(RollValue, _Component);
-	
-	    function RollValue(props) {
-	        _classCallCheck(this, RollValue);
-	
-	        return _possibleConstructorReturn(this, (RollValue.__proto__ || Object.getPrototypeOf(RollValue)).call(this, props));
-	    }
-	
-	    _createClass(RollValue, [{
-	        key: "render",
-	        value: function render() {
-	            var answer = null;
-	            if (this.props.dieSize === "6") {
-	                answer = _react2.default.createElement("img", { src: "images/die_" + this.props.dieSize + "_face_" + this.props.randomNumber + ".png" });
-	            } else {
-	                answer = _react2.default.createElement(
-	                    "h3",
-	                    null,
-	                    this.props.randomNumber
-	                );
-	            }
-	            return _react2.default.createElement(
-	                "div",
-	                null,
-	                answer
-	            );
-	        }
-	    }]);
-	
-	    return RollValue;
-	}(_react.Component);
-	
-	exports.default = RollValue;
 
 /***/ }
 /******/ ]);

@@ -1,5 +1,6 @@
 var path = require('path');
 var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+var webpack = require('webpack');
 
 var src = path.resolve(__dirname, "react/src/index.jsx");
 var scss = path.resolve(__dirname, "./react/scss");
@@ -33,7 +34,11 @@ var config = {
     sassLoader: {
         includePaths: [ scss ]
     },
-    plugins: [new BrowserSyncPlugin({
+    plugins: [new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery"
+    }),
+        new BrowserSyncPlugin({
         host: 'localhost',
         port: 3001,
         proxy: 'http://localhost:3000'

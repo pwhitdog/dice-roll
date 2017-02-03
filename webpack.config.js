@@ -29,7 +29,11 @@ var config = {
             {
                 test: /\.scss$/,
                 loaders: ["style-loader", "css-loader?sourceMap", "sass-loader?sourceMap"]
-            }]
+            },
+            {
+                test: /\.json$/, loader: "json", include: "./license.json"
+            }
+        ]
     },
     sassLoader: {
         includePaths: [ scss ]

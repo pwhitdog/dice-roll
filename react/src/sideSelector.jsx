@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import RollValue from './rollValue';
+import api from 'json!../../license.json';
 
 class SideSelector extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-            sides: this.getSides(),
+            sides: [4, 6, 8, 10, 12, 16, 20],
             defaultOption: 4,
             showRollValue: false,
             randomNumber: 4
@@ -17,26 +18,27 @@ class SideSelector extends Component {
         this.randomNumber = this.randomNumber.bind(this);
     }
 
-    getSides() {
-        return [4, 6, 8, 10, 12, 16, 20];
-    }
-
     handleOptionChange(event) {
         this.setState({
-            defaultOption: event.target.value,
+            defaultOption: +event.target.value,
             showRollValue: false
         });
     }
 
     rollDice() {
-        this.setState({
-            showRollValue: true,
-            randomNumber: this.randomNumber()
-        });
+        this.randomNumber();
     }
 
     randomNumber() {
-        return Math.floor(Math.random() * (this.state.defaultOption)) + 1;
+        let self = this;
+
+        $.get("https://www.random.org/integers/?num=1&min=1&max=" + this.state.defaultOption + "&col=1&base=10&format=plain&rnd=new")
+            .done(data => {
+                self.setState({
+                    showRollValue: true,
+                    randomNumber: +data
+                });
+        });
     }
 
     render() {
@@ -49,16 +51,16 @@ class SideSelector extends Component {
         }
 
         return (
-            <div>
-                <select value={this.state.defaultOption} onChange={this.handleOptionChange}>
+            <div className="center row">
+                <select value={this.state.defaultOption} onChange={this.handleOptionChange} className="col-xs-6 col-xs-offset-3 col-md-6 col-lg-2 col-lg-offset-5">
                     {
                         this.state.sides.map(side => {
                             return <option value={side} key={side}>{side}</option>;
                         })
                     }
                 </select>
-                <div>
-                    <button className="btn btn-primary" onClick={this.rollDice}>Roll!</button>
+                <div className="center row">
+                    <button className="btn btn-primary col-xs-6 col-xs-offset-3 col-md-6 col-lg-2 col-lg-offset-5" onClick={this.rollDice}>Roll!</button>
                 </div>
                 {display}
             </div>

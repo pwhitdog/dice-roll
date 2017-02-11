@@ -27,11 +27,15 @@
     "@types/react-dom": "^0.14.20",
     "bootstrap": "^3.3.7",
     "express": "^4.14.0",
+    "jayson": "^2.0.2",
     "jquery": "^3.1.1",
     "morgan": "^1.7.0",
+    "node-json-rpc": "0.0.1",
     "pug": "^2.0.0-beta6",
+    "random-org": "^0.1.5",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-promise": "^1.1.2",
     "serve-favicon": "^2.3.2"
   },
   "devDependencies": {

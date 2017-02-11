@@ -1,21 +1,23 @@
 import React, {Component} from 'react';
-import RollValue from './rollValue';
 import api from 'json!../../license.json';
-
+import DiceSelector from './diceSelector';
+let RandomOrg = require('random-org');
 class SideSelector extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-            sides: [4, 6, 8, 10, 12, 16, 20],
             defaultOption: 4,
             showRollValue: false,
-            randomNumber: 4
-        };
+            randomNumber: 4,
+            dieSizes : [4, 6, 8, 10, 12, 16, 20, 100]
+    };
 
         this.handleOptionChange = this.handleOptionChange.bind(this);
         this.rollDice = this.rollDice.bind(this);
-        this.randomNumber = this.randomNumber.bind(this);
+        this.getNewRandomNumbers = this.getNewRandomNumbers.bind(this);
+        this.getNewRandomNumbers();
+
     }
 
     handleOptionChange(event) {
@@ -23,46 +25,55 @@ class SideSelector extends Component {
             defaultOption: +event.target.value,
             showRollValue: false
         });
+
     }
 
     rollDice() {
-        this.randomNumber();
+        console.log(this.state.allRandomNumbers[5]);
     }
 
-    randomNumber() {
-        let self = this;
+    getNewRandomNumbers() {
+        let promises = this.state.dieSizes.map(d => {
+            return this.callRandomDotOrg(d);
+        });
 
-        $.get("https://www.random.org/integers/?num=1&min=1&max=" + this.state.defaultOption + "&col=1&base=10&format=plain&rnd=new")
-            .done(data => {
-                self.setState({
-                    showRollValue: true,
-                    randomNumber: +data
-                });
+        Promise.all(promises).then(results => {
+            this.setState({
+               allRandomNumbers: results
+            });
+        });
+
+    }
+
+    callRandomDotOrg(dieSize)  {
+        return new Promise((resolve) => {
+            let random = new RandomOrg({ apiKey: api.apiKey });
+            random.generateIntegers({ min: 1, max: dieSize, n: 100 })
+                .then(function(result) {
+                    resolve(result.random.data);
+                })
         });
     }
 
     render() {
-
-        let display = null;
-        if (this.state.showRollValue){
-            display = <RollValue dieSize={this.state.defaultOption} randomNumber={this.state.randomNumber} />;
-        } else {
-            display = <div></div>
-        }
+        let headers = this.state.dieSizes.map(function (dieSize) {
+           return <th key={dieSize}><DiceSelector dieValue={dieSize} /></th>;
+        });
 
         return (
-            <div className="center row">
-                <select value={this.state.defaultOption} onChange={this.handleOptionChange} className="col-xs-6 col-xs-offset-3 col-md-6 col-lg-2 col-lg-offset-5">
-                    {
-                        this.state.sides.map(side => {
-                            return <option value={side} key={side}>{side}</option>;
-                        })
-                    }
-                </select>
-                <div className="center row">
-                    <button className="btn btn-primary col-xs-6 col-xs-offset-3 col-md-6 col-lg-2 col-lg-offset-5" onClick={this.rollDice}>Roll!</button>
-                </div>
-                {display}
+            <div className="container">
+                <table>
+                    <thead>
+                        <tr>
+                            {headers}
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                <button className="btn btn-primary col-xs-6 col-xs-offset-3 col-md-6 col-lg-2 col-lg-offset-5" onClick={this.rollDice}>Roll!</button>
+
             </div>
         );
     }

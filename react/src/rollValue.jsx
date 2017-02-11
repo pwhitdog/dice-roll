@@ -13,13 +13,13 @@ class RollValue extends Component {
         let answer = null;
         let crit = null;
         if(this.props.dieSize === 6 || this.props.dieSize === 20 || this.props.dieSize === 4){
-            answer = <img src={"images/die_" + this.props.dieSize + "_face_" + this.props.randomNumber + ".png"} className="col-xs-6 col-xs-offset-3 col-md-6"/>;
+            answer = <img src={"images/die_" + this.props.dieSize + "_face_" + this.props.getNewRandomNumbers + ".png"} className="col-xs-6 col-xs-offset-3 col-md-6"/>;
         } else {
-            answer = <h3 className="col-xs-6 col-xs-offset-3 col-md-6 center">{this.props.randomNumber}</h3>;
+            answer = <h3 className="col-xs-6 col-xs-offset-3 col-md-6 center">{this.props.getNewRandomNumbers}</h3>;
         }
-        if(this.props.dieSize === this.props.randomNumber) {
+        if(this.props.dieSize === this.props.getNewRandomNumbers) {
             crit = <h3 className="alert alert-danger col-xs-6 col-xs-offset-3 col-md-6">Crit!</h3>
-        } else if(this.props.randomNumber === 1) {
+        } else if(this.props.getNewRandomNumbers === 1) {
             crit = <h3 className="alert alert-warning col-xs-6 col-xs-offset-3 col-md-6">Negative Crit!</h3>
         }
         return (

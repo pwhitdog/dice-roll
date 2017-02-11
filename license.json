@@ -1,3 +1,9 @@
 {
-  "apiKey": "dec477dd-e70a-4bba-85ef-54074fd5a635"
+  "apiKey": "dec477dd-e70a-4bba-85ef-54074fd5a635",
+  "rpcOptions": {
+    "port": 443,
+    "host": "https://api.random.org/json-rpc/1/invoke",
+    "path": "/",
+    "strict": true
+  }
 }

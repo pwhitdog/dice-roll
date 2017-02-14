@@ -2,27 +2,6 @@
   text-align: center;
 }
 
-button {
-  margin: 10px;
-  height: 30px;
-}
-
-th button, th img, th input {
-  display: block;
-  text-align: center;
-}
-
-th button, th img {
-  width: 90%;
-}
-
-th input {
-  margin: 8px 12px;
-  width: 80%;
-}
-
-th img {
-  max-height: 35px;
-  max-width: 35px;
-  margin-left: 20px;
+img {
+  max-width: 100%;
 }

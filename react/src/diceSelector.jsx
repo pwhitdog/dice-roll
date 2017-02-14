@@ -40,11 +40,11 @@ class DiceSelector extends Component {
 
     render() {
         return (
-            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <img src={'images/die_' + this.props.dieValue + '.png'} />
-                <button className="btn" onClick={this.addDie}><span className="glyphicon glyphicon-plus"></span></button>
-                <input type="number" min="1" max={this.props.dieValue} value={this.state.numberOfDice}/>
-                <button className="btn" onClick={this.subtractDie}><span className="glyphicon glyphicon-minus"></span></button>
+            <div className="col-md-1">
+                <div className="btn col-md-12 col-md-offset-1"><img src={'images/die_' + this.props.dieValue + '.png'} /></div>
+                <button className="btn col-md-12 col-md-offset-1" onClick={this.addDie}><span className="glyphicon glyphicon-plus"></span></button>
+                <div className="btn col-md-12 col-md-offset-1"><input type="number" min="1" max={this.props.dieValue} value={this.state.numberOfDice}/></div>
+                <button className="btn col-md-12 col-md-offset-1" onClick={this.subtractDie}><span className="glyphicon glyphicon-minus"></span></button>
             </div>
         );
     }

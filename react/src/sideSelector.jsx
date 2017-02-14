@@ -10,7 +10,8 @@ class SideSelector extends Component {
             defaultOption: 4,
             showRollValue: false,
             randomNumber: 4,
-            dieSizes : [4, 6, 8, 10, 12, 16, 20, 100]
+            dieSizes : [4, 6, 8, 10, 12, 16, 20, 100],
+            rolledDice: []
     };
 
         this.handleOptionChange = this.handleOptionChange.bind(this);
@@ -29,7 +30,9 @@ class SideSelector extends Component {
     }
 
     rollDice() {
-        console.log(this.state.allRandomNumbers[5]);
+        this.setState({
+           rolledDice: [1,2,3,4,5,6,7,8]
+        });
     }
 
     getNewRandomNumbers() {
@@ -56,23 +59,30 @@ class SideSelector extends Component {
     }
 
     render() {
-        let headers = this.state.dieSizes.map(function (dieSize) {
-           return <th key={dieSize}><DiceSelector dieValue={dieSize} /></th>;
+        let diceSelectors = this.state.dieSizes.map(function (dieSize) {
+           return <DiceSelector key={dieSize} dieValue={dieSize} />;
+        });
+
+        let rolledDice = this.state.rolledDice.map(function(roll){
+           return <td key={roll}>{roll}</td>
         });
 
         return (
-            <div className="container">
-                <table>
-                    <thead>
-                        <tr>
-                            {headers}
-                        </tr>
-                    </thead>
-                    <tbody>
+            <div className="container-fluid">
 
+                <div className="row">
+                    <div className="col-md-offset-1 col-md-1"></div>
+                    {diceSelectors}
+                </div>
+                <button className="btn btn-primary col-xs-6 col-xs-offset-3 col-md-6 col-lg-2 col-lg-offset-5" onClick={this.rollDice}>Roll!</button>
+
+                <table>
+                    <tbody>
+                        <tr>
+                            {rolledDice}
+                        </tr>
                     </tbody>
                 </table>
-                <button className="btn btn-primary col-xs-6 col-xs-offset-3 col-md-6 col-lg-2 col-lg-offset-5" onClick={this.rollDice}>Roll!</button>
 
             </div>
         );
